@@ -1,7 +1,7 @@
 const path = require("path");
 const {VueLoaderPlugin}=require('vue-loader')
-// 引入html的插件
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: "production",
   entry: "./src/main.js",
@@ -15,13 +15,14 @@ module.exports = {
       template: "./public/index.html",
       filename: "index.html",
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin(),
   ],
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.less$/i,
